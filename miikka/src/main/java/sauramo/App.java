@@ -13,22 +13,22 @@ public class App {
 
   public String muunna(final String stringToTranspose) {
     
-    String[] arr = stringToTranspose.split("\\s(?=\\S)");
+    String[] wordsIncludingTrailingWhitespace = stringToTranspose.split("\\s(?=\\S)");
 
-    if (arr.length < 2) { // trivial case of one word
+    if (wordsIncludingTrailingWhitespace.length < 2) { // trivial case of one word
       return stringToTranspose;
     }
 
     String oddword = "";
 
-    if (arr.length % 2 != 0) { // check if words have odd or even count and store last value for end result
-      oddword = arr[arr.length - 1]; // after removing it from processing
-      arr = Arrays.copyOf(arr, arr.length - 1);
+    if (wordsIncludingTrailingWhitespace.length % 2 != 0) { // check if words have odd or even count and store last value for end result
+      oddword = wordsIncludingTrailingWhitespace[wordsIncludingTrailingWhitespace.length - 1]; // after removing it from processing
+      wordsIncludingTrailingWhitespace = Arrays.copyOf(wordsIncludingTrailingWhitespace, wordsIncludingTrailingWhitespace.length - 1);
     }
 
     final List<String> result = new ArrayList<String>();
     
-    for (final String ss : arr) {
+    for (final String ss : wordsIncludingTrailingWhitespace) {
       final Pattern pattern = Pattern.compile("[aeiouyäåö]", Pattern.CASE_INSENSITIVE);
       final Matcher matcher = pattern.matcher(ss);
 

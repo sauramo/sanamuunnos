@@ -9,15 +9,15 @@ public class AppTest {
 	@Test
 	public void testGivenExamples() {
 		App app = new App();
-		assertEquals(app.muunna("Donald Trump"), "Trunald Domp");
-		assertEquals(app.muunna("vuoirkage mäölnö"), "mäörkage vuoilnö");
-		assertEquals(app.muunna("death, famine, and pestilence"), "fath, deamine, pend astilence");
-		assertEquals(app.muunna("foo bar baz"), "ba foor baz");
-		assertEquals(app.muunna("fooma barbu"), "bama foorbu");
-		assertEquals(app.muunna("amama  bomomo foo"), "bomama  amomo foo");
-		assertEquals(app.muunna("Supercalifragilisticexpialidocious!"), "Supercalifragilisticexpialidocious!");
-    assertEquals(app.muunna("I'd rather die here."), "ra'd Ither he diere.");
-    assertEquals(app.muunna("qraesar šyvgfvå eo"), "šysar qraevgfvå eo");
-    assertEquals(app.muunna("eäšyĸnfn owtxqyuthäuny eomäbw odkkafudhcfiuc"), "ošyĸnfn eäwtxqyuthäuny omäbw eodkkafudhcfiuc");    
+		assertEquals("Trunald Domp", app.muunna("Donald Trump"));
+		assertEquals("mäörkage vuoilnö", app.muunna("vuoirkage mäölnö"));
+		assertEquals("fath, deamine, pend astilence", app.muunna("death, famine, and pestilence"));
+		assertEquals("ba foor baz", app.muunna("foo bar baz"));
+		assertEquals("bama foorbu", app.muunna("fooma barbu"));
+		assertEquals("bomama  amomo foo", app.muunna("amama  bomomo foo"));
+		assertEquals("Supercalifragilisticexpialidocious!", app.muunna("Supercalifragilisticexpialidocious!"));
+    assertEquals("ra'd Ither he diere.", app.muunna("I'd rather die here."));
+    assertEquals("šysar qraevgfvå eo", app.muunna("qraesar šyvgfvå eo"));
+    assertEquals("ošyĸnfn eäwtxqyuthäuny omäbw eodkkafudhcfiuc", app.muunna("eäšyĸnfn owtxqyuthäuny eomäbw odkkafudhcfiuc"));    
 	}
 }

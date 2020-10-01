@@ -20,7 +20,6 @@ import java.io.BufferedWriter;
 import java.nio.charset.Charset;
 import java.lang.IllegalStateException;
 
-// Handler value: example.HandlerStream
 public class Handler implements RequestStreamHandler {
   Gson gson = new GsonBuilder().setPrettyPrinting().create();
   App app = new App();
@@ -32,15 +31,10 @@ public class Handler implements RequestStreamHandler {
     PrintWriter writer = new PrintWriter(
         new BufferedWriter(new OutputStreamWriter(outputStream, Charset.forName("UTF-8"))));
     try {
-      // writer.write(reader.toString());
-      HashMap event = gson.fromJson(reader, HashMap.class);
+      HashMap<?, ?> event = gson.fromJson(reader, HashMap.class);
       String input = event.get("body-json").toString();
-      logger.log("INPUT STRING: " + input);
       String result = app.muunna(input);
       writer.write("\"" + result + "\"");
-      // logger.log("STREAM TYPE: " + inputStream.getClass().toString());
-      // logger.log("EVENT TYPE: " + event.getClass().toString());
-      // writer.write(gson.toJson(event));
       if (writer.checkError()) {
         logger.log("WARNING: Writer encountered an error.");
       }
