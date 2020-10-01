@@ -12,7 +12,8 @@ import java.util.stream.Collectors;
 public class App {
 
   public String muunna(final String stringToTranspose) {
-    String[] arr = stringToTranspose.split(" ");
+    
+    String[] arr = stringToTranspose.split("\\s(?=\\S)");
 
     if (arr.length < 2) { // trivial case of one word
       return stringToTranspose;
@@ -54,18 +55,15 @@ public class App {
     String finalResult = "";
     String rearrangedWordPairs = "";
     int count = 0;
-    for (List<String> groupOfFours : partitionedList) {
-
+    for (final List<String> groupOfFours : partitionedList) {
       final String[] stringArray = groupOfFours.stream().toArray(String[]::new);
       String rearrangedParts = stringArray[2] + stringArray[1] + " " + stringArray[0] + stringArray[3] + " ";
       rearrangedWordPairs += rearrangedParts;
-
       count++;
       if (count == partitionedList.size()) { // add to constructed string at last iteration only
         finalResult = (rearrangedWordPairs + oddword).trim();
       }
     }
-
     return finalResult;
   }
 
