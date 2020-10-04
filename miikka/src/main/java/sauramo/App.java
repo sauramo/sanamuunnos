@@ -19,47 +19,35 @@ public class App {
       return input;
     }
 
-    String oddword = "", finalResult = "", rearrangedWordPairs = "";
+    String oddword = "", finalResult = "", swappedWordPairs = "";
 
     if (words.length % 2 != 0) {          // Store last word for end result
       oddword = words[words.length - 1];  // if count of words is not even
-      words = Arrays.copyOf(words, words.length - 1);
+      words = Arrays.copyOf(words, words.length - 1); // and remove it from processing
     }
 
-    List<String> result = new ArrayList<String>();
+    List<String> listOfSplittedWords = new ArrayList<String>();
     
     for (String wordToProcess : words) {
-      Pattern pattern = Pattern.compile("[aeiouyäåö]", Pattern.CASE_INSENSITIVE);
-      Matcher matchFirstVowel = pattern.matcher(wordToProcess);
+      Pattern pattern = Pattern.compile("^(?:[^aeiouyäåö]*([aeiouyäåö]+))", Pattern.CASE_INSENSITIVE);
+      Matcher matchLastOfConsecutiveVowels = pattern.matcher(wordToProcess);
 
-      while (matchFirstVowel.find()) {
-        String lettersUntilFirstVowel = wordToProcess.substring(0, matchFirstVowel.end());
-        String lettersAfterFirstVowel = wordToProcess.substring(matchFirstVowel.end(), wordToProcess.length());
-        Matcher matchConsecutiveVowels = pattern.matcher(lettersAfterFirstVowel);
-        if (lettersAfterFirstVowel.length() > 0) {
-          matchConsecutiveVowels = pattern.matcher(lettersAfterFirstVowel.substring(0, 1));
-        }
-
-        if (!matchConsecutiveVowels.find()) {
-          result.add(lettersUntilFirstVowel);
-          result.add(lettersAfterFirstVowel);
-          break;
-        }
+      while (matchLastOfConsecutiveVowels.find()) {
+        String lettersUntilLastConsecutiveVowel = wordToProcess.substring(0, matchLastOfConsecutiveVowels.end());
+        String lettersAfterLastConsecutiveVowel = wordToProcess.substring(matchLastOfConsecutiveVowels.end(), wordToProcess.length());
+        listOfSplittedWords.add(lettersUntilLastConsecutiveVowel);
+        listOfSplittedWords.add(lettersAfterLastConsecutiveVowel);
       }
     }
 
-    Collection<List<String>> partitionedList = partitionToSize(result, 4);
-
-    int count = 0;
-    for (List<String> groupOfFours : partitionedList) {
-      String rearrangedParts = groupOfFours.get(2) + groupOfFours.get(1) + " " +
-                               groupOfFours.get(0) + groupOfFours.get(3) + " ";
-      rearrangedWordPairs += rearrangedParts;
-      count++;
-      if (count == partitionedList.size()) { // add to constructed string at last iteration only
-        finalResult = (rearrangedWordPairs + oddword).trim();
-      }
+    Collection<List<String>> listOfWordPairs = partitionToSize(listOfSplittedWords, 4);
+    
+    for (List<String> wordPairToSwap : listOfWordPairs) {
+      String swappedWordPair = wordPairToSwap.get(2) + wordPairToSwap.get(1) + " " +
+                               wordPairToSwap.get(0) + wordPairToSwap.get(3) + " ";
+      swappedWordPairs += swappedWordPair;      
     }
+    finalResult = (swappedWordPairs + oddword).trim();
     return finalResult;
   }
 
