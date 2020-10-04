@@ -5,11 +5,11 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>sauramo</groupId>
-	<artifactId>miikka</artifactId>
+	<artifactId>sanamuunnos</artifactId>
 	<version>1.0-SNAPSHOT</version>
 
-	<name>miikka</name>
-	<url>https://github.com/sauramo</url>
+	<name>Sanamuunnos</name>
+	<url>https://github.com/sauramo/sanamuunnos</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
