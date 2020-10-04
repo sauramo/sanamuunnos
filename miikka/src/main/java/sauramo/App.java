@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 
 public class App {
 
-  public String muunna(String stringToTranspose) {
+  public String transform(String input) {
     
-    String[] words = stringToTranspose.split("\\s(?=\\S)");
+    String[] words = input.split("\\s(?=\\S)");
 
     if (words.length < 2) { // trivial case of one word
-      return stringToTranspose;
+      return input;
     }
 
     String oddword = "", finalResult = "", rearrangedWordPairs = "";

@@ -33,7 +33,7 @@ public class Handler implements RequestStreamHandler {
     try {
       HashMap<?, ?> event = gson.fromJson(reader, HashMap.class);
       String input = event.get("body-json").toString();
-      String result = app.muunna(input);
+      String result = app.transform(input);
       writer.write("\"" + result + "\"");
       if (writer.checkError()) {
         logger.log("WARNING: Writer encountered an error.");
